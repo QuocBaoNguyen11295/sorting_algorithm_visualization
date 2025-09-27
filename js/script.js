@@ -11,26 +11,23 @@ function generateArray(size = 8) {
     }
 }
 
-function swapBoxes(box1, box2) {
-    return new Promise((resolve) => {
-        const box1Rect = box1.getBoundingClientRect();
-        const box2Rect = box2.getBoundingClientRect();
+async function swapBoxes(box1, box2) {
+    const box1Rect = box1.getBoundingClientRect();
+    const box2Rect = box2.getBoundingClientRect();
 
-        const distance = box2Rect.left - box1Rect.left;
+    const distance = box2Rect.left - box1Rect.left;
 
-        box1.style.transform = `translateX(${distance}px)`;
-        box2.style.transform = `translateX(${-distance}px)`;
+    box1.style.transform = `translateX(${distance}px)`;
+    box2.style.transform = `translateX(${-distance}px)`;
 
-        setTimeout(() => {
-            box1.style.transform = "";
-            box2.style.transform = "";
-
-            arrayContainer.insertBefore(box2, box1);
-
-            resolve();
-        }, 500);
-    });
+    setTimeout(() => {
+        box1.style.transform = "";
+        box2.style.transform = "";
+        arrayContainer.insertBefore(box2, box1);
+    }, 500);
 }
+
+
 
 async function bubbleSort() {
     const boxes = arrayContainer.children;
@@ -121,6 +118,22 @@ async function quickSort(low, high) {
         let pi = await partition(low, high);
         await quickSort(low, pi - 1);
         await quickSort(pi + 1, high);
+    }
+}
+
+async function interchangeSort() {
+    const boxes = arrayContainer.children;
+    for (let i = 0; i < boxes.length - 1; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+            boxes[i].classList.add("active");
+            boxes[j].classList.add("active");
+            await new Promise((r) => setTimeout(r, 300));
+            if (parseInt(boxes[i].textContent) > parseInt(boxes[j].textContent)) {
+                await swapBoxes(boxes[i], boxes[j]);
+            }
+            boxes[i].classList.remove("active");
+            boxes[j].classList.remove("active");
+        }
     }
 }
 
