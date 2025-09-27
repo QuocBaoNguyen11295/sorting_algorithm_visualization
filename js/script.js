@@ -38,7 +38,7 @@ async function bubbleSort() {
             box1.classList.add("active");
             box2.classList.add("active");
 
-            await new Promise((r) => setTimeout(r, 300));
+            await new Promise((r) => setTimeout(r, 500));
 
             if (parseInt(box1.textContent) > parseInt(box2.textContent)) {
                 await swapBoxes(box1, box2);
@@ -75,7 +75,7 @@ async function selectionSort() {
             boxes[minIndex].classList.add("active");
             boxes[j].classList.add("active");
 
-            await new Promise((r) => setTimeout(r, 200));
+            await new Promise((r) => setTimeout(r, 500));
 
             if (parseInt(boxes[j].textContent) < parseInt(boxes[minIndex].textContent)) {
                 boxes[minIndex].classList.remove("active");
@@ -99,7 +99,7 @@ async function partition(low, high) {
         boxes[j].classList.add("active");
         boxes[high].classList.add("active");
 
-        await new Promise((r) => setTimeout(r, 200));
+        await new Promise((r) => setTimeout(r, 500));
 
         if (parseInt(boxes[j].textContent) < pivot) {
             i++;
@@ -127,7 +127,7 @@ async function interchangeSort() {
         for (let j = i + 1; j < boxes.length; j++) {
             boxes[i].classList.add("active");
             boxes[j].classList.add("active");
-            await new Promise((r) => setTimeout(r, 300));
+            await new Promise((r) => setTimeout(r, 500));
             if (parseInt(boxes[i].textContent) > parseInt(boxes[j].textContent)) {
                 await swapBoxes(boxes[i], boxes[j]);
             }
